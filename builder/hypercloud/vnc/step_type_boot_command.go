@@ -52,12 +52,9 @@ func (s *stepTypeBootCommand) Run(state multistep.StateBag) multistep.StepAction
 	ui.Say("Connecting to VM via VNC")
 
 	vncListen := fmt.Sprintf("127.0.0.1:%d", vncProxyPort)
-	wsUrl := fmt.Sprintf("ws://%s:%d/", vncSession.Host, vncSession.Port)
-
 	ui.Say(fmt.Sprintf("VNCProxy listening: %s", vncListen))
-	ui.Say(fmt.Sprintf("Upsream WS URL: %s", wsUrl))
 
-	go tcp2ws.Proxy(false, vncListen, wsUrl)
+	go tcp2ws.Proxy(false, vncListen, vncSession.Url)
 	time.Sleep(500 * time.Millisecond)
 
 	nc, err := net.Dial("tcp", vncListen)

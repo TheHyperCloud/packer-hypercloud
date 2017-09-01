@@ -235,6 +235,7 @@ func startStop(api *hypercloud.ApiClient, instanceid string, timeout uint, actio
 type ConsoleSession struct {
 	Host        string
 	Port        uint
+	Url         string
 	Token       string
 	ConsoleType string
 	InstanceID  string
@@ -264,9 +265,14 @@ func (session *ConsoleSession) Request(api *hypercloud.ApiClient, timeout uint) 
 		state := request["state"].(string)
 
 		if state == "ready" {
+			session.ConsoleType = request["type"].(string)
 			session.Token = request["token"].(string)
-			session.Host = request["host"].(string)
-			session.Port = uint(request["port"].(float64))
+			if session.ConsoleType == "vnc" {
+				session.Url = request["url"].(string)
+			} else {
+				session.Host = request["host"].(string)
+				session.Port = uint(request["port"].(float64))
+			}
 			break
 		}
 
