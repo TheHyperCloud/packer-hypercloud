@@ -21,10 +21,10 @@
 			"revisionTime": "2015-03-05T14:45:30Z"
 		},
 		{
-			"checksumSHA1": "mv6uqh8X4wdx+3RBQKIbaRZmmCM=",
+			"checksumSHA1": "8KawKW6FJguwWz5cPvMg/ChmepE=",
 			"path": "github.com/gorilla/websocket",
-			"revision": "ab5b3a61f5b6aa323d66ece457334396c4ccdd03",
-			"revisionTime": "2015-01-15T06:16:10Z"
+			"revision": "a69d9f6de432e2c6b296a947d8a5ee88f68522cf",
+			"revisionTime": "2017-07-18T20:23:41Z"
 		},
 		{
 			"checksumSHA1": "cdOCt0Yb+hdErz8NAQqayxPmRsY=",
@@ -81,10 +81,10 @@
 			"revisionTime": "2014-02-18T18:59:01Z"
 		},
 		{
-			"checksumSHA1": "DVtYezFFxRp5wIweVk9J/ODaWD4=",
+			"checksumSHA1": "xDIjUpsIs28ePDSAr824jOXrtzM=",
 			"path": "github.com/mcclymont/tcp2ws-go",
-			"revision": "3c1a6fb083d2f3764f1bdb34db03fa243228fec8",
-			"revisionTime": "2015-03-27T00:26:44Z"
+			"revision": "b61862d004fce8f09c522de3441b5c164febf7c6",
+			"revisionTime": "2017-08-30T17:16:47Z"
 		},
 		{
 			"checksumSHA1": "mVqDwKcibat0IKAdzAhfGIHPwI8=",
