@@ -133,10 +133,8 @@ func (self *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (pa
 		new(stepConfigurePublicKey),
 		new(stepBootInstance),
 		&communicator.StepConnect{
-			Config:    &self.config.Comm,
-			Host:      commHost,
-			SSHConfig: sshConfig,
-			SSHPort:   commPort,
+			Config: &self.config.Comm,
+			Host:   commHost,
 		},
 		new(common.StepProvision),
 		new(stepShutdown),

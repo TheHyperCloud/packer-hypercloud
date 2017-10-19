@@ -30,9 +30,13 @@ func (s *stepAllocateIP) Run(state multistep.StateBag) multistep.StepAction {
 	address := ip["address"].(string)
 	ui.Say(fmt.Sprintf("Allocated ip %s", address))
 	state.Put("ip", ip)
-	state.Put("ssh_address", address)
+	state.Put("ip_address", address)
 
 	return multistep.ActionContinue
+}
+
+func commHost(state multistep.StateBag) (string, error) {
+	return state.Get("ip_address").(string), nil
 }
 
 func (s *stepAllocateIP) Cleanup(state multistep.StateBag) {

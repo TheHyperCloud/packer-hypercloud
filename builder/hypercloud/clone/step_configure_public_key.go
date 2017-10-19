@@ -17,8 +17,14 @@ type stepConfigurePublicKey struct{}
 
 func (s *stepConfigurePublicKey) Run(state multistep.StateBag) multistep.StepAction {
 	config := state.Get("config").(*Config)
-	client := state.Get("client").(*hypercloud.ApiClient)
 	ui := state.Get("ui").(packer.Ui)
+
+	if config.Comm.Password() != "" {
+		ui.Say("Skipping pub key configuration because password is supplied")
+		return multistep.ActionContinue
+	}
+
+	client := state.Get("client").(*hypercloud.ApiClient)
 	instance := state.Get("instance").(map[string]interface{})
 	instanceId := instance["id"].(string)
 
