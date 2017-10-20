@@ -50,7 +50,7 @@ func (s *stepCreateDisk) Run(state multistep.StateBag) multistep.StepAction {
 
 	ui.Say("Creating boot disk")
 
-	diskName := "Packer in-progress: " + config.VMName
+	diskName := "Packer in-progress: " + config.PackerBuildName
 	disk, err := api.CreateTemplateDisk(client, config.DiskSize, diskName, config.regionId, config.DiskPerformanceTierID, template["id"].(string))
 	if err != nil {
 		err := fmt.Errorf("Error creating template disk via api: %s: %s", err, disk)

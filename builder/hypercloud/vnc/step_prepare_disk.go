@@ -18,7 +18,7 @@ func (s *stepCreateDisk) Run(state multistep.StateBag) multistep.StepAction {
 	client := state.Get("client").(*hypercloud.ApiClient)
 	ui := state.Get("ui").(packer.Ui)
 
-	diskName := "Packer in-progress: " + config.VMName
+	diskName := "Packer in-progress: " + config.PackerBuildName
 	ui.Say(fmt.Sprintf("Creating blank target disk with name %s", diskName))
 	disk, err := api.CreateBlankDisk(client, config.DiskSize, diskName, config.regionId, config.DiskPerformanceTierID)
 	if err != nil {

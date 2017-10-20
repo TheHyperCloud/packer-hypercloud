@@ -19,7 +19,7 @@ func (s *stepAllocateIP) Run(state multistep.StateBag) multistep.StepAction {
 	client := state.Get("client").(*hypercloud.ApiClient)
 	ui := state.Get("ui").(packer.Ui)
 
-	ipName := "Packer: " + config.VMName
+	ipName := "Packer: " + config.PackerBuildName
 	ui.Say("Allocating IP address")
 	ip, err := api.AllocateIP(client, config.NetworkID, ipName)
 	if err != nil {

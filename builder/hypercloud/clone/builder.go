@@ -32,7 +32,6 @@ type Config struct {
 	DiskSize                  uint   `mapstructure:"disk_size"`
 	NetworkID                 string `mapstructure:"network_id"`
 	Memory                    uint   `mapstructure:"memory"`
-	VMName                    string `mapstructure:"vm_name"`
 	HYPERCLOUD_ID             string `mapstructure:"hypercloud_id"`
 	HYPERCLOUD_SECRET         string `mapstructure:"hypercloud_secret"`
 	HYPERCLOUD_URL            string `mapstructure:"hypercloud_url"`
@@ -70,10 +69,6 @@ func (self *Builder) Prepare(raws ...interface{}) (params []string, retErr error
 
 	if self.config.Memory == 0 {
 		self.config.Memory = 512
-	}
-
-	if self.config.VMName == "" {
-		self.config.VMName = fmt.Sprintf("packer-%s", self.config.PackerBuildName)
 	}
 
 	if self.config.TemplateID == "" && self.config.TemplateName == "" {
@@ -179,7 +174,7 @@ func (self *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (pa
 
 	// Rename the disk to signify success
 	timeStr := time.Now().Format("2006-01-02 15:04:05")
-	newDiskName := fmt.Sprintf("Packer completed: %s %s", self.config.VMName, timeStr)
+	newDiskName := fmt.Sprintf("Packer completed: %s %s", self.config.PackerBuildName, timeStr)
 	disk, _ = api.UpdateDisk(&client, diskId, map[string]interface{}{
 		"name": newDiskName,
 	})

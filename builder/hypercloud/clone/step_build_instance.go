@@ -19,7 +19,7 @@ func (s *stepBuildInstance) Run(state multistep.StateBag) multistep.StepAction {
 	boot_disk := state.Get("disk").(map[string]interface{})
 	ip := state.Get("ip").(map[string]interface{})
 
-	instanceName := "Packer: " + config.VMName
+	instanceName := "Packer: " + config.PackerBuildName
 
 	diskids := []string{
 		boot_disk["id"].(string),

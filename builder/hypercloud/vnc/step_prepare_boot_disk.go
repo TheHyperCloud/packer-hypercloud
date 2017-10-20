@@ -95,7 +95,7 @@ func (s *stepPrepareBootDisk) Run(state multistep.StateBag) multistep.StepAction
 
 		// Create the new disk
 		ui.Say("Creating blank disk to be used as the boot disk")
-		boot_disk, err = api.CreateBlankDisk(client, 10, "Downloading... "+config.VMName, config.regionId, config.DiskPerformanceTierID)
+		boot_disk, err = api.CreateBlankDisk(client, 10, "Downloading... "+config.PackerBuildName, config.regionId, config.DiskPerformanceTierID)
 		if err != nil {
 			err := fmt.Errorf("Error creating new blank disk for boot disk via api: %s", err)
 			state.Put("error", err)
@@ -204,9 +204,9 @@ func (s *stepPrepareBootDisk) Run(state multistep.StateBag) multistep.StepAction
 			return multistep.ActionHalt
 		}
 
-		// Rename the disk to the VMName, and include the MD5 hash
+		// Rename the disk to the builder name, and include the MD5 hash
 		boot_disk, err = api.UpdateDisk(client, boot_disk["id"].(string), map[string]interface{}{
-			"name": config.VMName + " " + md5_substr,
+			"name": config.PackerBuildName + " " + md5_substr,
 		})
 		if err != nil {
 			err = fmt.Errorf("Error renaming boot_disk: %s", err)

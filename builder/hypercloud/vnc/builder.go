@@ -32,7 +32,6 @@ type Config struct {
 	BootDiskMD5              string `mapstructure:"boot_disk_md5"`
 	BootDiskURL              string `mapstructure:"boot_disk_url"`
 	DownloaderVMID           string `mapstructure:"downloader_vm_id"`
-	VMName                   string `mapstructure:"vm_name"`
 	NetworkID                string `mapstructure:"network_id"`
 	Memory                   uint   `mapstructure:"memory"`
 	HYPERCLOUD_ID            string `mapstructure:"hypercloud_id"`
@@ -92,10 +91,6 @@ func (self *Builder) Prepare(raws ...interface{}) (params []string, retErr error
 
 	if self.config.Memory == 0 {
 		self.config.Memory = 512
-	}
-
-	if self.config.VMName == "" {
-		self.config.VMName = fmt.Sprintf("packer-%s", self.config.PackerBuildName)
 	}
 
 	if self.config.RawBootWait == "" {
@@ -252,7 +247,7 @@ func (self *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (pa
 
 	// Rename the disk to signify success
 	timeStr := time.Now().Format("2006-01-02 15:04:05")
-	newDiskName := fmt.Sprintf("Packer completed: %s %s", self.config.VMName, timeStr)
+	newDiskName := fmt.Sprintf("Packer completed: %s %s", self.config.PackerBuildName, timeStr)
 	disk, _ = api.UpdateDisk(&client, diskId, map[string]interface{}{
 		"name": newDiskName,
 	})

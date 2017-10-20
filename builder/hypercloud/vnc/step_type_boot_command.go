@@ -84,7 +84,7 @@ func (s *stepTypeBootCommand) Run(state multistep.StateBag) multistep.StepAction
 	ctx.Data = &bootCommandTemplateData{
 		config.HTTPIP,
 		httpPort,
-		config.VMName,
+		config.PackerBuildName,
 		config.HYPERCLOUD_IP,
 		config.HYPERCLOUD_NETMASK,
 		config.HYPERCLOUD_CIDR,
