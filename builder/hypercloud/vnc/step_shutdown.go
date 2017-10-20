@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/mitchellh/multistep"
-	"github.com/mitchellh/packer/packer"
+	"github.com/hashicorp/packer/packer"
 	"github.com/thehypercloud/apiclient-go"
 	"github.com/thehypercloud/packer-hypercloud/api"
 )

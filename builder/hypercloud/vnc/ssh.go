@@ -2,8 +2,8 @@ package vnc
 
 import (
 	"github.com/mitchellh/multistep"
-	commonssh "github.com/mitchellh/packer/common/ssh"
-	"github.com/mitchellh/packer/communicator/ssh"
+	commonssh "github.com/hashicorp/packer/common/ssh"
+	"github.com/hashicorp/packer/communicator/ssh"
 	gossh "golang.org/x/crypto/ssh"
 )
 

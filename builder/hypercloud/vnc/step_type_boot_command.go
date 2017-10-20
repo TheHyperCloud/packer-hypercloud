@@ -12,8 +12,8 @@ import (
 	"github.com/mcclymont/tcp2ws-go"
 	"github.com/mitchellh/go-vnc"
 	"github.com/mitchellh/multistep"
-	"github.com/mitchellh/packer/packer"
-	"github.com/mitchellh/packer/template/interpolate"
+	"github.com/hashicorp/packer/packer"
+	"github.com/hashicorp/packer/template/interpolate"
 	"github.com/thehypercloud/packer-hypercloud/api"
 )
 

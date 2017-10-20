@@ -1,5 +1,5 @@
 # packer-hypercloud
-This is a plugin for [Packer](https://github.com/mitchellh/packer) which works with the HyperCloud platform.
+This is a plugin for [Packer](https://github.com/hashicorp/packer) which works with the HyperCloud platform.
 
 ## Building from source
 * At least Go 1.5.3 is required, as well as govendor (go get -u github.com/kardianos/govendor)
