@@ -36,6 +36,7 @@ type Config struct {
 	HYPERCLOUD_SECRET         string `mapstructure:"hypercloud_secret"`
 	HYPERCLOUD_URL            string `mapstructure:"hypercloud_url"`
 	HYPERCLOUD_ACCESS_TOKEN   string `mapstructure:"hypercloud_access_token"`
+	ShutdownFromAPI           bool   `mapstructure:"shutdown_from_api"`
 
 	regionId       string
 	virtualization string
