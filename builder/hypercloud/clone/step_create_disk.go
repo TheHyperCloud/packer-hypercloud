@@ -7,10 +7,22 @@ import (
 	"github.com/hashicorp/packer/packer"
 	"github.com/thehypercloud/apiclient-go"
 	"github.com/thehypercloud/packer-hypercloud/api"
+	"sort"
 )
 
 // Clone the target disk from the template
 type stepCreateDisk struct{}
+
+type ByVersionDesc [](map[string]interface{})
+func (s ByVersionDesc) Len() int {
+	return len(s)
+}
+func (s ByVersionDesc) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+func (s ByVersionDesc) Less(i, j int) bool {
+	return s[i]["version"].(float64) > s[j]["version"].(float64)
+}
 
 func (s *stepCreateDisk) Run(state multistep.StateBag) multistep.StepAction {
 	config := state.Get("config").(*Config)
@@ -31,11 +43,15 @@ func (s *stepCreateDisk) Run(state multistep.StateBag) multistep.StepAction {
 		state.Put("error", err)
 		return multistep.ActionHalt
 	}
+	sort.Sort(ByVersionDesc(templates))
 	var template map[string]interface{}
 	for i := range templates {
 		t := templates[i]
 		templateRegionId := t["region"].(map[string]interface{})["id"].(string)
-		if config.regionId == templateRegionId && ( (config.TemplateName != "" && config.TemplateName == t["name"]) || t["id"] == config.TemplateID ) {
+		if config.regionId == templateRegionId && (
+			config.TemplateID == t["id"] ||
+				(config.TemplateSlug != "" && config.TemplateSlug == t["slug"]) ||
+					(config.TemplateName != "" && config.TemplateName == t["name"])) {
 			template = t
 			break
 		}

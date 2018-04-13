@@ -27,6 +27,7 @@ type Config struct {
 
 	TemplateID                string `mapstructure:"template_id"`
 	TemplateName              string `mapstructure:"template_name"`
+	TemplateSlug			  string `mapstructure:"template_slug"`
 	DiskPerformanceTierID     string `mapstructure:"disk_performance_tier_id"`
 	InstancePerformanceTierID string `mapstructure:"instance_performance_tier_id"`
 	DiskSize                  uint   `mapstructure:"disk_size"`
@@ -72,8 +73,18 @@ func (self *Builder) Prepare(raws ...interface{}) (params []string, retErr error
 		self.config.Memory = 512
 	}
 
-	if self.config.TemplateID == "" && self.config.TemplateName == "" {
-		errs = packer.MultiErrorAppend(errs, fmt.Errorf("either template_id or template_name is required"))
+	templatePresentCount := 0
+	if self.config.TemplateID != "" {
+		templatePresentCount += 1
+	}
+	if self.config.TemplateName != "" {
+		templatePresentCount += 1
+	}
+	if self.config.TemplateSlug != "" {
+		templatePresentCount += 1
+	}
+	if templatePresentCount != 1 {
+		errs = packer.MultiErrorAppend(errs, fmt.Errorf("must provide 1 of template_id, template_name or template_slug"))
 	}
 
 	if self.config.HYPERCLOUD_URL == "" {
